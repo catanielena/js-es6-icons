@@ -109,16 +109,43 @@ const icons = [
 	  category: "animal"
 	},
   ];
-
+//color map
+const colors = {
+    food: "red",
+    animal:"green",
+    beverage: "blue"
+};
+// iconsWrapper
 const iconsWrapper = document.getElementById("icons");
-icons.forEach(
+/*
+**
+**PROGRAMMA PRINCIPALE
+**
+*/
+/*
+**printIcons
+*/
+const printIcons = (arr, container) => {
+    arr.forEach(
+        (e) => {
+            container.innerHTML += `
+            <div class="icons-wrapper__card">
+               <i class="card__icon ${e.family} ${e.prefix + e.name}" style="color:${e.color}"></i>
+               <div class="card__label">
+                    ${e.name}
+               </div>
+            </div>`;
+        }
+    );
+};
+// array icons and colors
+const colorIcons = icons.map(
     (e) => {
-        iconsWrapper.innerHTML += `
-        <div class="icons-wrapper__card">
-           <i class="card__icon ${e.family} ${e.prefix + e.name}"></i>
-           <div class="card__label">
-                ${e.name}
-           </div>
-        </div>`
+        return {
+            ...e,
+            color: colors[e.category]
+        }
     }
-);
+)
+console.log("colorIcons", colorIcons);
+printIcons(colorIcons, iconsWrapper);
