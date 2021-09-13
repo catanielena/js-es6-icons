@@ -183,3 +183,28 @@ window.addEventListener("load",
         //print icons
         printIcons(colorIcons, iconsWrapper);
 });
+// *
+// *
+// *
+// * Add btn
+const btnAdd = document.getElementById("btn_add");
+// Add event
+btnAdd.addEventListener("click",
+    () => {
+        let newIcon = {};
+        newIcon.name = document.getElementById("name").value;
+        newIcon.family = document.getElementById("family").value;
+        newIcon.prefix = document.getElementById("prefix").value;
+        newIcon.category = document.getElementById("category").value;
+        let c = newIcon.category;
+        // newIcon.category = 
+        if(iconCategories.includes(c) == false) {
+            iconCategories.push(c);
+            selectCategory.innerHTML += `<option value="${c}">${c}</option>`;
+            colors[c] = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+        }
+        newIcon.color = colors[c];
+        colorIcons.push(newIcon);
+        printIcons(colorIcons, iconsWrapper);
+}
+);
