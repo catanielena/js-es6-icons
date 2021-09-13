@@ -139,6 +139,18 @@ const printIcons = (arr, container) => {
         }
     );
 };
+/*
+**printIcon
+*/
+const addNew = (icon) => {
+    iconsWrapper.innerHTML += `
+    <div class="icons-wrapper__card">
+       <i class="card__icon ${icon.family} ${icon.prefix + icon.name}" style="color:${icon.color}"></i>
+       <div class="card__label">
+            ${icon.name}
+       </div>
+    </div>`;
+}
 // array icons and colors
 const colorIcons = icons.map(
     (e) => {
@@ -191,26 +203,24 @@ const btnAdd = document.getElementById("btn_add");
 // Add event
 btnAdd.addEventListener("click",
     () => {
+        // get newIcon values
         let newIcon = {};
         newIcon.name = document.getElementById("name").value;
         newIcon.family = document.getElementById("family").value;
         newIcon.prefix = document.getElementById("prefix").value;
         newIcon.category = document.getElementById("category").value;
         let c = newIcon.category;
-        // newIcon.category = 
+        // newIcon category case
         if(iconCategories.includes(c) == false) {
             iconCategories.push(c);
             selectCategory.innerHTML += `<option value="${c}">${c}</option>`;
             colors[c] = `#${Math.floor(Math.random()*16777215).toString(16)}`;
         }
+        //assign newIcon color
         newIcon.color = colors[c];
+        //push newIcon into colorIcons
         colorIcons.push(newIcon);
-        iconsWrapper.innerHTML += `
-        <div class="icons-wrapper__card">
-           <i class="card__icon ${newIcon.family} ${newIcon.prefix + newIcon.name}" style="color:${newIcon.color}"></i>
-           <div class="card__label">
-                ${newIcon.name}
-           </div>
-        </div>`;
+        //print newIcon
+        addNew(newIcon);
 }
 );
