@@ -126,6 +126,7 @@ const iconsWrapper = document.getElementById("icons");
 **printIcons
 */
 const printIcons = (arr, container) => {
+    container.innerHTML = "";
     arr.forEach(
         (e) => {
             container.innerHTML += `
@@ -148,4 +149,37 @@ const colorIcons = icons.map(
     }
 )
 console.log("colorIcons", colorIcons);
-printIcons(colorIcons, iconsWrapper);
+// get select
+const selectCategory = document.getElementById("icon-category");
+// get categories
+const iconCategories = [];
+colorIcons.forEach(
+    (e) => {
+        if(iconCategories.includes(e.category) == false) {
+            iconCategories.push(e.category);
+        }
+    }
+);
+console.log("iconCategories", iconCategories);
+// display options
+iconCategories.forEach(
+    (e) => {
+        selectCategory.innerHTML += `<option value="${e}">${e}</option>`
+    }
+);
+// change event 
+selectCategory.addEventListener("change",
+    () => {
+        const filter = colorIcons.filter((e) => selectCategory.value == e.category || selectCategory.value=="all"
+        );
+        console.log(filter);
+        //print icons
+        printIcons(filter, iconsWrapper);
+    }
+);
+// on load 
+window.addEventListener("load", 
+    () => { 
+        //print icons
+        printIcons(colorIcons, iconsWrapper);
+});
