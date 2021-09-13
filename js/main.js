@@ -205,6 +205,12 @@ btnAdd.addEventListener("click",
         }
         newIcon.color = colors[c];
         colorIcons.push(newIcon);
-        printIcons(colorIcons, iconsWrapper);
+        iconsWrapper.innerHTML += `
+        <div class="icons-wrapper__card">
+           <i class="card__icon ${newIcon.family} ${newIcon.prefix + newIcon.name}" style="color:${newIcon.color}"></i>
+           <div class="card__label">
+                ${newIcon.name}
+           </div>
+        </div>`;
 }
 );
